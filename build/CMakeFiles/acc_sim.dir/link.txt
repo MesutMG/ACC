@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/acc_sim.dir/src/main.c.o -o acc_sim 

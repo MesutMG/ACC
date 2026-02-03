@@ -1,0 +1,3 @@
+/home/mesut/projects/ACC_Project/build/CMakeFiles/acc_sim.dir
+/home/mesut/projects/ACC_Project/build/CMakeFiles/edit_cache.dir
+/home/mesut/projects/ACC_Project/build/CMakeFiles/rebuild_cache.dir
