@@ -8,6 +8,7 @@
 #define AREA 2.5f                   //m^2 (frontal cut)
 #define GRAVITY 9.81f               //m/s^2
 #define ROLLING_RESISTANCE 0.015f   //road friction
+#define ENGINE_FORCE_MAX 5000.0f    //5000N at 100% throttle
 
 /**
  * @brief Calculates aerodynamic drag force.

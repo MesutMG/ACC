@@ -12,12 +12,10 @@ int main(){
 
     printf("Initial speed: %.2f m/s\n", my_car.velocity);
 
-
     update_vehicle_state(&my_car, 0.1);
     printf("Speed after update: %.2f m/s\n", my_car.velocity);
 
     printf("---o---o---o---o---");
-    
     
     return 0;
 }
