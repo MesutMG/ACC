@@ -9,12 +9,10 @@ typedef enum {
 } acc_status_t;
 
 typedef struct {
-    double velocity;
-    double position;
-    double mass;
-    double engine_force;
-    uint8_t brake_pedal;
-
+    double velocity;   // m/s
+    double position;   // m
+    double mass;       // kg
+    double throttle;   // 0-100%
 } Vehicle_t;
 
 #endif
