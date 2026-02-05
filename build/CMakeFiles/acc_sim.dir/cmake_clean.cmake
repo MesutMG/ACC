@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/acc_sim.dir/src/main.c.o"
   "CMakeFiles/acc_sim.dir/src/main.c.o.d"
+  "CMakeFiles/acc_sim.dir/src/physics.c.o"
+  "CMakeFiles/acc_sim.dir/src/physics.c.o.d"
   "acc_sim"
   "acc_sim.pdb"
 )

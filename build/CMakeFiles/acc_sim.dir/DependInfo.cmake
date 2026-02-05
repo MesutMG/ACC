@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/mesut/projects/ACC_Project/src/main.c" "CMakeFiles/acc_sim.dir/src/main.c.o" "gcc" "CMakeFiles/acc_sim.dir/src/main.c.o.d"
+  "/home/mesut/projects/ACC_Project/src/physics.c" "CMakeFiles/acc_sim.dir/src/physics.c.o" "gcc" "CMakeFiles/acc_sim.dir/src/physics.c.o.d"
   )
 
 # Targets to which this target links.

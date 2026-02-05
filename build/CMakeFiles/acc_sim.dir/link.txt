@@ -1,1 +1,1 @@
-/usr/bin/cc CMakeFiles/acc_sim.dir/src/main.c.o -o acc_sim 
+/usr/bin/cc CMakeFiles/acc_sim.dir/src/main.c.o CMakeFiles/acc_sim.dir/src/physics.c.o -o acc_sim  -lm 

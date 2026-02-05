@@ -153,6 +153,30 @@ src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/acc_sim.dir/build.make CMakeFiles/acc_sim.dir/src/main.c.s
 .PHONY : src/main.c.s
 
+src/physics.o: src/physics.c.o
+.PHONY : src/physics.o
+
+# target to build an object file
+src/physics.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/acc_sim.dir/build.make CMakeFiles/acc_sim.dir/src/physics.c.o
+.PHONY : src/physics.c.o
+
+src/physics.i: src/physics.c.i
+.PHONY : src/physics.i
+
+# target to preprocess a source file
+src/physics.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/acc_sim.dir/build.make CMakeFiles/acc_sim.dir/src/physics.c.i
+.PHONY : src/physics.c.i
+
+src/physics.s: src/physics.c.s
+.PHONY : src/physics.s
+
+# target to generate assembly for a file
+src/physics.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/acc_sim.dir/build.make CMakeFiles/acc_sim.dir/src/physics.c.s
+.PHONY : src/physics.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -165,6 +189,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/physics.o"
+	@echo "... src/physics.i"
+	@echo "... src/physics.s"
 .PHONY : help
 
 
