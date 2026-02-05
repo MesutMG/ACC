@@ -9,7 +9,10 @@ include_directories(include)
 
 set(SOURCES
     src/main.c
+    src/physics.c
 
 )
 
 add_executable(acc_sim ${SOURCES})
+
+target_link_libraries(acc_sim m)

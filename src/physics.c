@@ -14,22 +14,44 @@ double calculate_friction(double mass){
     (GRAVITY * mass * ROLLING_RESISTANCE);
 }
 
+double calculate_net_force(Vehicle_t *v){
+    if ((v->velocity > 0)){
+        return(
+        (ENGINE_FORCE_MAX * v->throttle)
+        - calculate_drag(v->velocity)
+        - calculate_friction(v->mass));
+    }
+
+    else if ((v->velocity = 0)){
+        return 0.0;
+    }
+
+    else if ((v->velocity < 0)){
+        v->velocity = 0.0;
+        //direction is stored independently, so no negative velocity
+        return 0.0;
+    }
+
+    return 1;
+}
+
 void physics_update(Vehicle_t *v, double dt){
 
-    double engine_force = ENGINE_FORCE_MAX * v->throttle;
+    double net_force = calculate_net_force(v);
 
-    double net_force =
-    (engine_force - calculate_drag(v->velocity) - calculate_friction(v->mass));
-
-    if (net_force < 0){
-        return(0);
+    if ((v->velocity = 0) && (net_force < 0)){
+        return;
     }
 
     double acceleration = net_force / v->mass;
 
     v->velocity = v->velocity + acceleration * dt;
 
+    if (v->velocity < 0){
+        v->velocity = 0;
+    }
+
     v->position = v->position + v->velocity * dt; 
 
-    return(0);
+    return;
 }

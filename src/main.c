@@ -2,24 +2,43 @@
 #include <acc_types.h>
 
 acc_status_t update_vehicle_state(Vehicle_t *v, double time_step);
+void physics_update(Vehicle_t *v, double dt);
 
 int main(){
 
     Vehicle_t my_car;
-    my_car.velocity = 10.0;
-    my_car.mass = 1200.0;
+    my_car.velocity = 0.0;
+    my_car.mass = 1000.0;
     my_car.position = 0.0;
 
+    //t = 0-10
+    my_car.throttle = 50.0;
+    for (uint8_t i = 0; i < 10; i++)
+    {
+        physics_update(&my_car, i);
+    }
+    printf("\nVelocity at t=10: %f\nPosition at t=10: %f\n\n", my_car.velocity, my_car.position);
+
+    //t = 10-20
+    my_car.throttle = 0.0;
+    for (uint8_t i = 0; i < 10; i++)
+    {
+        physics_update(&my_car, i);
+    }
+    printf("Velocity at t=20: %f\nPosition at t=20: %f\n\n", my_car.velocity, my_car.position);
+    
+
+    /*
     printf("Initial speed: %.2f m/s\n", my_car.velocity);
 
     update_vehicle_state(&my_car, 0.1);
     printf("Speed after update: %.2f m/s\n", my_car.velocity);
 
-    printf("---o---o---o---o---");
-    
+    printf("\n\n---o---o---o---o---\n");
+  */  
     return 0;
 }
-
+/*
 acc_status_t update_vehicle_state(Vehicle_t *v, double time_step){
     if (v == NULL){
         return ACC_ERROR; //safety check to the pointer
@@ -30,4 +49,5 @@ acc_status_t update_vehicle_state(Vehicle_t *v, double time_step){
     v->position = v->position + (v->velocity * time_step);
 
     return ACC_OK;
-}
+}*/
+
