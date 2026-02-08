@@ -12,21 +12,36 @@ int main(){
     my_car.position = 0.0;
     my_car.throttle = 0.0;
 
+    FILE *fpt;
+    fpt = fopen("vehicle_status.csv", "w+");
+    fprintf(fpt, "Velocity  Position    Throttle\n");
+    fclose(fpt);
+
     //t = 0-10 ,    0.1 increase for presicion
     my_car.throttle = 0.5; //50%
     for (uint8_t i = 0; i < 100; i++)
     {
         physics_update(&my_car, i*0.1);
-    }
-    printf("\nVelocity at t=10: %f\nPosition at t=10: %f\n\n", my_car.velocity, my_car.position);
 
+        fpt = fopen("vehicle_status.csv", "a+");
+        fprintf(fpt, "%f    %f  %f\n",
+        my_car.velocity, my_car.position, my_car.throttle);
+        fclose(fpt);
+    }
+    //printf("\nVelocity at t=10: %f\nPosition at t=10: %f\n\n", my_car.velocity, my_car.position);
+    
     //t = 10-20 ,   0.1 increase for presicion
     my_car.throttle = 0.0; //0%
     for (uint8_t i = 0; i < 100; i++)
     {
         physics_update(&my_car, i*0.1);
+
+        fpt = fopen("vehicle_status.csv", "a+");
+        fprintf(fpt, "%f    %f  %f\n",
+        my_car.velocity, my_car.position, my_car.throttle);
+        fclose(fpt);
     }
-    printf("Velocity at t=20: %f\nPosition at t=20: %f\n\n", my_car.velocity, my_car.position);
+    //printf("Velocity at t=20: %f\nPosition at t=20: %f\n\n", my_car.velocity, my_car.position);
     
 
     return 0;
