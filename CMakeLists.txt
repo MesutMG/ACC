@@ -14,5 +14,3 @@ set(SOURCES
 )
 
 add_executable(acc_sim ${SOURCES})
-
-target_link_libraries(acc_sim m)

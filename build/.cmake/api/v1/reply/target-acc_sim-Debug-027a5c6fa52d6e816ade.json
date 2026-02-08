@@ -11,7 +11,6 @@
 		"commands" : 
 		[
 			"add_executable",
-			"target_link_libraries",
 			"add_compile_options",
 			"include_directories"
 		],
@@ -33,17 +32,11 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 18,
-				"parent" : 0
-			},
-			{
-				"command" : 2,
-				"file" : 0,
 				"line" : 6,
 				"parent" : 0
 			},
 			{
-				"command" : 3,
+				"command" : 2,
 				"file" : 0,
 				"line" : 8,
 				"parent" : 0
@@ -59,15 +52,15 @@
 					"fragment" : "-g"
 				},
 				{
-					"backtrace" : 3,
+					"backtrace" : 2,
 					"fragment" : "-Wall"
 				},
 				{
-					"backtrace" : 3,
+					"backtrace" : 2,
 					"fragment" : "-Wextra"
 				},
 				{
-					"backtrace" : 3,
+					"backtrace" : 2,
 					"fragment" : "-Wpedantic"
 				},
 				{
@@ -77,7 +70,7 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 4,
+					"backtrace" : 3,
 					"path" : "/home/mesut/projects/ACC_Project/include"
 				}
 			],
@@ -109,11 +102,6 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "-lm",
-				"role" : "libraries"
 			}
 		],
 		"language" : "C"

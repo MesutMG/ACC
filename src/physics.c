@@ -1,11 +1,9 @@
 #include "physics.h"
-#include <math.h>
-
 
 double calculate_drag(double velocity){
 
     return
-    (0.5 * AIR_DENSITY * pow(velocity, 2) * AREA * DRAG_COEFF);
+    (0.5 * AIR_DENSITY * velocity * velocity * AREA * DRAG_COEFF);
 }
 
 double calculate_friction(double mass){
