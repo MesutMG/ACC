@@ -2,6 +2,7 @@
 #define ACC_TYPES_H
 
 #include <stdint.h>
+#include "acc_logic.h"
 
 typedef enum {
     ACC_OK = 0,
@@ -13,6 +14,8 @@ typedef struct {
     double position;   // m
     double mass;       // kg
     double throttle;   // 0-100%
+    AccState_t state;  //acc_logic.h  
+    double target_speed;
 } Vehicle_t;
 
 #endif

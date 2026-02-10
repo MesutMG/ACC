@@ -10,6 +10,7 @@ include_directories(include)
 set(SOURCES
     src/main.c
     src/physics.c
+    src/acc_logic.c
 
 )
 
