@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#define KP 0.4f
+
 //off, standby, active, error
 typedef enum {
     ACC_OFF,      // System disabled

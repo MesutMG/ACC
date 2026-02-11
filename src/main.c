@@ -18,6 +18,8 @@ int main(){
     fclose(fpt);
 
     fpt = fopen("vehicle_status.csv", "a+");
+
+
     //t = 0-10 ,    0.1 increase for presicion
     my_car.throttle = 0.5; //50%
     for (uint8_t i = 0; i < 100; i++)
@@ -28,8 +30,11 @@ int main(){
         fprintf(fpt, "%f    %f  %f\n",
         my_car.velocity, my_car.position, my_car.throttle);
     }
-    //printf("\nVelocity at t=10: %f\nPosition at t=10: %f\n\n", my_car.velocity, my_car.position);
     
+    AccInputs_t testinput = {1,100,0,130};
+    acc_update(my_car, testinput, 0.1)
+
+    /*
     //t = 10-20 ,   0.1 increase for presicion
     my_car.throttle = 0.0; //0%
     for (uint8_t i = 0; i < 100; i++)
@@ -39,9 +44,9 @@ int main(){
 
         fprintf(fpt, "%f    %f  %f\n",
         my_car.velocity, my_car.position, my_car.throttle);
-    }
+    }*/
     fclose(fpt);
-    //printf("Velocity at t=20: %f\nPosition at t=20: %f\n\n", my_car.velocity, my_car.position);
+    
     
 
     return 0;

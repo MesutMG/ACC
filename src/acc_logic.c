@@ -32,14 +32,10 @@ void acc_update(Vehicle_t *v, AccInputs_t inputs, double dt) {
                 }
                 
                 else  {
-                    v->throttle = (v->target_speed - v->velocity) ;//https://youtu.be/XVYRT0Mbu7A?t=194;
+                    v->throttle = KP * (v->target_speed - v->velocity);
+                                /* + KP/ti * last_error_reset */;//PI control equation
                 }
                 
-
-                // Run Cruise Control Logic
-                // If distance < 150, throttle = 0
-                // Else, Simple P-Control: throttle = (target - current) * Kp
-            }
             break;
     }
 }
