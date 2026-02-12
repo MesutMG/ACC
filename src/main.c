@@ -3,6 +3,7 @@
 
 acc_status_t update_vehicle_state(Vehicle_t *v, double time_step);
 void physics_update(Vehicle_t *v, double dt);
+void acc_update(Vehicle_t *v, AccInputs_t inputs, double dt);
 
 int main(){
 
@@ -30,9 +31,13 @@ int main(){
         fprintf(fpt, "%f    %f  %f\n",
         my_car.velocity, my_car.position, my_car.throttle);
     }
-    
+    //---------------------------------------------------------------
     AccInputs_t testinput = {1,100,0,130};
-    acc_update(my_car, testinput, 0.1)
+
+    for (uint8_t i = 0; i < 100; i++)
+    {
+        acc_update(&my_car,testinput,0.1);
+    }
 
     /*
     //t = 10-20 ,   0.1 increase for presicion

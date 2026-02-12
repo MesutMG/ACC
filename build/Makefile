@@ -129,6 +129,30 @@ acc_sim/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/acc_sim.dir/build.make CMakeFiles/acc_sim.dir/build
 .PHONY : acc_sim/fast
 
+src/acc_logic.o: src/acc_logic.c.o
+.PHONY : src/acc_logic.o
+
+# target to build an object file
+src/acc_logic.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/acc_sim.dir/build.make CMakeFiles/acc_sim.dir/src/acc_logic.c.o
+.PHONY : src/acc_logic.c.o
+
+src/acc_logic.i: src/acc_logic.c.i
+.PHONY : src/acc_logic.i
+
+# target to preprocess a source file
+src/acc_logic.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/acc_sim.dir/build.make CMakeFiles/acc_sim.dir/src/acc_logic.c.i
+.PHONY : src/acc_logic.c.i
+
+src/acc_logic.s: src/acc_logic.c.s
+.PHONY : src/acc_logic.s
+
+# target to generate assembly for a file
+src/acc_logic.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/acc_sim.dir/build.make CMakeFiles/acc_sim.dir/src/acc_logic.c.s
+.PHONY : src/acc_logic.c.s
+
 src/main.o: src/main.c.o
 .PHONY : src/main.o
 
@@ -186,6 +210,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... acc_sim"
+	@echo "... src/acc_logic.o"
+	@echo "... src/acc_logic.i"
+	@echo "... src/acc_logic.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

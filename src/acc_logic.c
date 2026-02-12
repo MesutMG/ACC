@@ -31,11 +31,12 @@ void acc_update(Vehicle_t *v, AccInputs_t inputs, double dt) {
                     v->throttle = 0.0;
                 }
                 
-                else  {
+                else  { //---------------------------------------------------
                     v->throttle = KP * (v->target_speed - v->velocity);
                                 /* + KP/ti * last_error_reset */;//PI control equation
                 }
                 
             break;
     }
+}
 }
