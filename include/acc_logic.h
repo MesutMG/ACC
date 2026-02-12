@@ -3,13 +3,13 @@
 
 #include <stdint.h>
 
-#define KP 0.4f
+#define KP 0.04f
 
 //off, standby, active, error
 typedef enum {
     ACC_OFF,      //system disabled
     ACC_STANDBY,  //system enabled but not active (zb speed too low)
-    ACC_ACTIVE   //system controlling throttle/brakes
+    ACC_ACTIVE    //system controlling throttle/brakes
 } AccState_t;
 
 //turn on, set speed, brake%, radar dist.
