@@ -33,11 +33,16 @@ int main(){
     }
  
     
-    AccInputs_t testinput = {1,40,0,160};
+    AccInputs_t test_acc_on = {1,0,0,160};
+    AccInputs_t acc_set_speed = {0,45,0,160};
+
+    acc_update(&my_car,test_acc_on);
+    acc_update(&my_car,acc_set_speed);
 
     for (uint8_t i = 0; i < 20; i++)
     {
-        acc_update(&my_car,testinput);
+        //acc_update won't be called beside of physics_update
+        acc_update(&my_car,acc_set_speed);
         physics_update(&my_car, 0.5);
         fprintf(fpt, "%f,%f,%f,%d\n",
         my_car.velocity, my_car.position, my_car.throttle, my_car.state);

@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #define KP 0.04f
+#define Ti 10.0f
 
 //off, standby, active, error
 typedef enum {
@@ -12,10 +13,10 @@ typedef enum {
     ACC_ACTIVE    //system controlling throttle/brakes
 } AccState_t;
 
-//turn on, set speed, brake%, radar dist.
+//on/off, set speed, brake%, radar dist.
 typedef struct {
-    uint8_t acc_on_switch;    // 1 = driver turned ACC ON
-    uint8_t set_speed_switch; // 1 = driver pressed "Set Speed"
+    uint8_t acc_on_off;       // 0 != pressed button
+    uint8_t set_speed_switch; //driver pressed "Set Speed"
     uint8_t brake_pedal;      // 0-100%
     double radar_distance;    //distance to lead vehicle (m)
 } AccInputs_t;
