@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <acc_types.h>
 
-acc_status_t update_vehicle_state(Vehicle_t *v, double time_step);
 void physics_update(Vehicle_t *v, double dt);
-void acc_update(Vehicle_t *v, AccInputs_t inputs);
+void acc_update(Vehicle_t *v);
+void acc_on_off(Vehicle_t *v);
 
 int main(){
 
@@ -14,6 +14,12 @@ int main(){
     my_car.throttle = 0.0;
     my_car.state = ACC_OFF;
 
+    my_car.inputs = (AccInputs_t){
+    .set_speed_switch = 0,
+    .brake_pedal = 0,
+    .radar_distance = 0.0
+};
+
     FILE *fpt;
     fpt = fopen("../vehicle_status.csv", "w+");
     fprintf(fpt, "Velocity,Position,Throttle\n");
@@ -21,36 +27,26 @@ int main(){
 
     fpt = fopen("../vehicle_status.csv", "a+");
 
-
+    //acc off, speeds up
     my_car.throttle = 0.5; //50%
     for (uint8_t i = 0; i < 20; i++)
     {
         physics_update(&my_car, 0.5);
-        //dt in seconds
-
-        fprintf(fpt, "%f,%f,%f\n",
-        my_car.velocity, my_car.position, my_car.throttle);
+        fprintf(fpt, "%f,%f,%f,%d\n",
+        my_car.velocity, my_car.position, my_car.throttle,my_car.state);
     }
  
-    
-    AccInputs_t test_acc_on = {1,0,0,160};
-    AccInputs_t acc_set_speed = {0,45,0,160};
+    acc_on_off(&my_car);
+    my_car.inputs = (AccInputs_t){18,0,160};
 
-    acc_update(&my_car,test_acc_on);
-    acc_update(&my_car,acc_set_speed);
-
-    for (uint8_t i = 0; i < 200; i++)
+    for (uint8_t i = 0; i < 100; i++)
     {
-        //acc_update won't be called beside of physics_update
-        acc_update(&my_car,acc_set_speed);
         physics_update(&my_car, 0.5);
         fprintf(fpt, "%f,%f,%f,%d\n",
         my_car.velocity, my_car.position, my_car.throttle, my_car.state);
     }
 
     fclose(fpt);
-    
-    
 
     return 0;
 }

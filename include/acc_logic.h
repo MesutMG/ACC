@@ -6,7 +6,7 @@
 #define KP 0.4f
 #define Ti 6.0f
 
-//off, standby, active, error
+//off, standby, active
 typedef enum {
     ACC_OFF,      //system disabled
     ACC_STANDBY,  //system enabled but not active (zb speed too low)
@@ -15,7 +15,6 @@ typedef enum {
 
 //on/off, set speed, brake%, radar dist.
 typedef struct {
-    uint8_t acc_on_off;       // 0 != pressed button
     uint8_t set_speed_switch; //driver pressed "Set Speed"
     uint8_t brake_pedal;      // 0-100%
     double radar_distance;    //distance to lead vehicle (m)

@@ -1,5 +1,7 @@
 #include "physics.h"
 
+void acc_update(Vehicle_t *v);
+
 double calculate_drag(double velocity){
 
     return
@@ -32,6 +34,10 @@ double calculate_net_force(Vehicle_t *v){
 }
 
 void physics_update(Vehicle_t *v, double dt){
+
+    if (v->state != ACC_OFF){
+        acc_update(v);
+    }
 
     double net_force = calculate_net_force(v);
 

@@ -4,51 +4,33 @@
 double last_error = 0.0f;
 double new_throttle;
 
-void acc_update(Vehicle_t *v, AccInputs_t inputs) {
+void acc_update(Vehicle_t *v) {
     printf("-------\n");
     //state machine
     switch (v->state) {
         case ACC_OFF:
             printf("acc_off///\n");
-            if (inputs.acc_on_off) {
-                v->state = ACC_STANDBY;
-                v->throttle = 0.0;
-            }
             break;
 
         case ACC_STANDBY:
             printf("acc_standby///\n");
-            if (inputs.set_speed_switch){
+            if (v->inputs.set_speed_switch){
                 v->state = ACC_ACTIVE;
-                v->target_speed = inputs.set_speed_switch;
+                v->target_speed = v->inputs.set_speed_switch;
             }
-
-            if (inputs.acc_on_off) {
-                v->state = ACC_OFF;
-                v->throttle = 0.0;
-            }
-            break;
 
         case ACC_ACTIVE:
             printf("acc_active///\n");
-            if (inputs.brake_pedal > 0) {
+            if (v->inputs.brake_pedal > 0) {
                 v->state = ACC_STANDBY;
                 v->throttle = 0.0;
-            }
+            } else {
 
-            else if (inputs.acc_on_off) {
-                v->state = ACC_STANDBY;
-                v->throttle = 0.0;
-            }
-            
-            else {
-
-                if (inputs.radar_distance < 150){
+                if (v->inputs.radar_distance < 150){
                     printf("radar distance low\n");
                     v->throttle = 0.0;
                 }
                 
-                //acc update will be seperated from the acc logic
                 else  { 
                     if (KP * (v->target_speed - v->velocity) >= 1.0){
                         v->throttle = 1.0;
@@ -75,4 +57,13 @@ void acc_update(Vehicle_t *v, AccInputs_t inputs) {
             break;
     }
 }
+}
+
+void acc_on_off(Vehicle_t *v){
+    if (v->state == ACC_OFF){
+        v->state = ACC_STANDBY;
+    } else if ((v->state == ACC_STANDBY) || (v->state = ACC_ACTIVE)) {
+        v->state = ACC_OFF; 
+    }
+    
 }
