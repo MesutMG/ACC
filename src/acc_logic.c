@@ -2,6 +2,7 @@
 #include "stdio.h"
 
 double last_error = 0.0f;
+double new_throttle;
 
 void acc_update(Vehicle_t *v, AccInputs_t inputs) {
     printf("-------\n");
@@ -54,11 +55,21 @@ void acc_update(Vehicle_t *v, AccInputs_t inputs) {
                     } else
                     {
                         last_error  = last_error + (KP / Ti) * (v->target_speed - v->velocity);
-                        v->throttle = KP * (v->target_speed - v->velocity)
-                                    + last_error;
+                        printf("error speed/// %f\n", (v->target_speed - v->velocity));
+                        
+                        new_throttle = KP * (v->target_speed - v->velocity) + last_error;
+
+                        if (new_throttle >= 0.0 && new_throttle <= 1.0){
+                            v->throttle = new_throttle;
+                        } else if (new_throttle > 1.0) {
+                            v->throttle = 1.0;
+                        } else {
+                            v->throttle = 0.0;
+                        }
+                        
                     }
                     
-                    printf("throttle %f\n",v->throttle);
+                    printf("throttle/// %f\n",v->throttle);
                 }
                 
             break;

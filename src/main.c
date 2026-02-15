@@ -39,7 +39,7 @@ int main(){
     acc_update(&my_car,test_acc_on);
     acc_update(&my_car,acc_set_speed);
 
-    for (uint8_t i = 0; i < 20; i++)
+    for (uint8_t i = 0; i < 200; i++)
     {
         //acc_update won't be called beside of physics_update
         acc_update(&my_car,acc_set_speed);

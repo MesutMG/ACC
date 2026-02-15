@@ -3,8 +3,8 @@
 
 #include <stdint.h>
 
-#define KP 0.04f
-#define Ti 10.0f
+#define KP 0.4f
+#define Ti 6.0f
 
 //off, standby, active, error
 typedef enum {
