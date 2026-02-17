@@ -20,5 +20,15 @@ while line:
     lines.append(words)
     line = file.readline()
 
-plt.plot(linesT[4],linesT[0])
+fig, axs = plt.subplots(2,2)
+fig.suptitle('ACC System')
+axs[0,0].plot(linesT[4],linesT[0])
+axs[0,0].set(xlabel="Time (s)", ylabel="Velocity (m/s)")
+axs[0,1].plot(linesT[4],linesT[1])
+axs[0,1].set(xlabel="Time (s)", ylabel="Position (m)")
+axs[1,0].plot(linesT[4], linesT[2])
+axs[1,0].set(xlabel="Time (s)", ylabel = "Throttle")
+axs[1,1].plot(linesT[4],linesT[3])
+axs[1,1].set(xlabel="Time (s)", ylabel="State")
+
 plt.show()

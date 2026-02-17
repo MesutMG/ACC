@@ -40,7 +40,7 @@ int main(){
     }
  
     acc_on_off(&my_car);
-    my_car.inputs = (AccInputs_t){18,0,160};
+    my_car.inputs = (AccInputs_t){48,0,160};
 
     for (uint8_t i = 0; i < 100; i++)
     {
