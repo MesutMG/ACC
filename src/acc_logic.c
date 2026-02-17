@@ -62,7 +62,7 @@ void acc_update(Vehicle_t *v) {
 void acc_on_off(Vehicle_t *v){
     if (v->state == ACC_OFF){
         v->state = ACC_STANDBY;
-    } else if ((v->state == ACC_STANDBY) || (v->state = ACC_ACTIVE)) {
+    } else if ((v->state == ACC_STANDBY) || (v->state == ACC_ACTIVE)) {
         v->state = ACC_OFF; 
     }
     
