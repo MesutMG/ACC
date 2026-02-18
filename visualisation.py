@@ -11,7 +11,7 @@ linesT = [[] for _ in range(len(line.split(",")))]  #for transposed
 
 while line:
     words = line.split(",") #csv seperation
-    words[-1] = words[-1][:-2:] #removing \n at the end of the last element
+    words[-1] = words[-1].strip() #removing \n at the end of the last element
 
     for i in range(len(words)):
         words[i] = float(words[i])

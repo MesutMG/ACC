@@ -24,7 +24,7 @@ int main(){
 
     FILE *fpt;
     fpt = fopen("../vehicle_status.csv", "w+");
-    fprintf(fpt, "Velocity,Position,Throttle\n");
+    fprintf(fpt, "Velocity,Position,Throttle,State,Time\n");
     fclose(fpt);
 
     fpt = fopen("../vehicle_status.csv", "a+");
