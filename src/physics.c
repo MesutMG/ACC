@@ -1,6 +1,6 @@
 #include "physics.h"
 
-void acc_update(Vehicle_t *v);
+void acc_update(Vehicle_t *v, double TIME_PASSED);
 
 double calculate_drag(double velocity){
 
@@ -33,10 +33,10 @@ double calculate_net_force(Vehicle_t *v){
  
 }
 
-void physics_update(Vehicle_t *v, double dt){
+void physics_update(Vehicle_t *v, double dt, double TIME_PASSED){
 
     if (v->state != ACC_OFF){
-        acc_update(v);
+        acc_update(v, TIME_PASSED);
     }
 
     double net_force = calculate_net_force(v);
@@ -49,7 +49,7 @@ void physics_update(Vehicle_t *v, double dt){
         v->velocity = 0;
     }
 
-    v->position = v->position + v->velocity * dt; 
+    v->position = v->position + v->velocity * dt;
 
     return;
 }

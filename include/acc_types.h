@@ -11,6 +11,8 @@ typedef struct {
     double throttle;   // 0-100%
     AccState_t state;  //OFF-SBY-ON 
     AccInputs_t inputs;//onoff-setspeed-brake-radar
+    double integral_error; //ACC PID
+    double last_error; //ACC PID
     double target_speed;
 } Vehicle_t;
 
