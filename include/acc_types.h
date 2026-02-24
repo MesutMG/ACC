@@ -9,11 +9,9 @@ typedef struct {
     double position;   // m
     double mass;       // kg
     double throttle;   // 0-100%
+    Acc_values acc_values;
     AccState_t state;  //OFF-SBY-ON 
     AccInputs_t inputs;//onoff-setspeed-brake-radar
-    double integral_error; //ACC PID
-    double last_error; //ACC PID
-    double target_speed;
 } Vehicle_t;
 
 #endif
