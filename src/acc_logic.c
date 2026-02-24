@@ -2,16 +2,16 @@
 #include "stdio.h"
 
 
-double acc_active_pid(Vehicle_t *v, double TIME_PASSED) {
+double acc_active_pid(Vehicle_t *v, double dt) {
     
-    if (TIME_PASSED <= 0.0){return 0.0;}
+    if (dt <= 0.0){return 0.0;}
 
     double speed_error = v->acc_values.target_speed - v->velocity;
 
     //declare PID variables, and set using speed_error
     double proportional = speed_error;
-    v->acc_values.integral_error += speed_error * TIME_PASSED;
-    double derivative = (speed_error - v->acc_values.last_error) / TIME_PASSED;
+    v->acc_values.integral_error += speed_error * dt;
+    double derivative = (speed_error - v->acc_values.last_error) / dt;
     
     //assign boundaries for integral max
     if (v->acc_values.integral_error > integral_max) {v->acc_values.integral_error = integral_max;}
@@ -29,7 +29,7 @@ double acc_active_pid(Vehicle_t *v, double TIME_PASSED) {
     return output;
 }
 
-void acc_update(Vehicle_t *v, double TIME_PASSED) {
+void acc_update(Vehicle_t *v, double dt) {
     printf("-------\n");
     //state machine
     switch (v->state) {
@@ -55,7 +55,7 @@ void acc_update(Vehicle_t *v, double TIME_PASSED) {
                 break;
             
             } else if (v->inputs.radar_front >= 150.0){
-                v->throttle = acc_active_pid(v, TIME_PASSED); 
+                v->throttle = acc_active_pid(v, dt); 
                 printf("throttle/// %f\n", v->throttle);
                 break;
             

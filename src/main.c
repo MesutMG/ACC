@@ -44,7 +44,7 @@ int main(){
     my_car.throttle = 0.50;
     //car_2.throttle = 0.450; -------------------------------------
     double time_step = 0.05f;
-
+/*
     for (uint32_t i = 0; i < 200; i++)
     { 
         physics_update(&my_car, time_step, TIME_PASSED);
@@ -58,11 +58,11 @@ int main(){
         fprintf(fpt, "%f,%f,%f,%f,%d,%f,%f,%f,%f\n",
         my_car.velocity, my_car.position, my_car.throttle, my_car.inputs.radar_front, my_car.state, TIME_PASSED,
         car_2.velocity, car_2.position, car_2.throttle);
-    }
+    }*/
  
 
     acc_on_off(&my_car);
-    acc_set_speed(&my_car,90);
+    acc_set_speed(&my_car,120);
     my_car.inputs = (AccInputs_t){0,(car_2.position - my_car.position)};
 
     for (uint32_t i = 0; i < 2000; i++)
