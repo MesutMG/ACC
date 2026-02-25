@@ -33,7 +33,7 @@ double calculate_net_force(Vehicle_t *v){
  
 }
 
-void physics_update(Vehicle_t *v, double dt, double TIME_PASSED){
+void physics_update(Vehicle_t *v, double dt){
 
     if (v->state != ACC_OFF){
         acc_update(v, dt);

@@ -3,9 +3,9 @@
 
 #include <stdint.h>
 
-#define Kp 0.02775f
-#define Ki 0.00349f
-#define Kd 0.025f
+#define Kp 0.04775f
+#define Ki 0.00677f
+#define Kd 0.07f
 #define integral_max 50.0f
 #define Kgap 0.02f //for gap-closing
 #define safe_following_distance 40.0f
@@ -22,6 +22,8 @@ typedef struct {
     double integral_error; //ACC PID
     double last_error; //ACC PID
     double target_speed;
+    double radar_speed; //speed of the car front
+    double last_radar_front;
 } Acc_values;
 
 //on/off, set speed, brake%, radar dist.

@@ -1,5 +1,4 @@
 from matplotlib import pyplot as plt
-from pprint import pprint
 
 file = open("./vehicle_status.csv","r")
 
@@ -20,15 +19,22 @@ while line:
     lines.append(words)
     line = file.readline()
 
-fig, axs = plt.subplots(2,2)
+fig, axs = plt.subplots(2,5)
 fig.suptitle('ACC System')
-axs[0,0].plot(linesT[4],linesT[0])
+axs[0,0].plot(linesT[5],linesT[0])
 axs[0,0].set(xlabel="Time (s)", ylabel="Velocity (m/s)")
-axs[0,1].plot(linesT[4],linesT[1])
+axs[0,1].plot(linesT[5],linesT[1])
 axs[0,1].set(xlabel="Time (s)", ylabel="Position (m)")
-axs[1,0].plot(linesT[4], linesT[2])
-axs[1,0].set(xlabel="Time (s)", ylabel = "Throttle")
-axs[1,1].plot(linesT[4],linesT[3])
-axs[1,1].set(xlabel="Time (s)", ylabel="State")
-
+axs[0,2].plot(linesT[5], linesT[2])
+axs[0,2].set(xlabel="Time (s)", ylabel = "Throttle")
+axs[0,3].plot(linesT[5],linesT[3])
+axs[0,3].set(xlabel="Time (s)", ylabel="Radar Distance")
+axs[0,4].plot(linesT[5],linesT[4])
+axs[0,4].set(xlabel="Time (s)", ylabel="State")
+axs[1,0].plot(linesT[5],linesT[6])
+axs[1,0].set(xlabel="Time (s)", ylabel="Velocity (m/s)")
+axs[1,1].plot(linesT[5], linesT[7])
+axs[1,1].set(xlabel="Time (s)", ylabel = "Position (m)")
+axs[1,2].plot(linesT[5],linesT[8])
+axs[1,2].set(xlabel="Time (s)", ylabel="Throttle")
 plt.show()
