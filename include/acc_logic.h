@@ -5,7 +5,7 @@
 
 #define Kp 0.02775f
 #define Ki 0.00349f
-#define Kd 0.025f
+#define Kd 0.026f
 #define integral_max 50.0f
 #define Kgap 0.02f //for gap-closing
 #define safe_following_distance 40.0f
