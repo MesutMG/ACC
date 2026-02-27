@@ -33,6 +33,8 @@ double calculate_net_force(Vehicle_t *v){
  
 }
 
+//use the equations to write a differential eq. and solve with runge-kutta
+
 void physics_update(Vehicle_t *v, double dt){
 
     if (v->state != ACC_OFF){
