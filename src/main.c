@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <acc_types.h>
+#include "acc_types.h"
 
 double TIME_PASSED = 0.0f;
 
@@ -54,6 +54,7 @@ int main(){
 
     FILE *fpt;
     fpt = fopen("../vehicle_status.csv", "w+");
+    if (fpt == NULL){perror("file could not be opened"); return 1;}
     fprintf(fpt, "Velocity,Position,Throttle,Radar Front,State,Time,Velocity,Position,Throttle\n");
 
     //acc off, speeds up

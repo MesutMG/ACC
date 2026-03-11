@@ -55,7 +55,7 @@ void acc_update(Vehicle_t *v, double dt) {
 
             } else if ((v->inputs.radar_front < 150.0) && (v->inputs.radar_front > 0)){
                 v->state = ACC_FOLLOW;
-                printf("radar lower than 15, activating follow");
+                printf("radar lower than 150, activating follow");
                 break;
             
             } else if (v->inputs.radar_front >= 150.0){
