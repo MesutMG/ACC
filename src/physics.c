@@ -1,6 +1,6 @@
 #include "physics.h"
 
-void acc_update(Vehicle_t *v, double TIME_PASSED);
+void acc_update(Vehicle_t *v, double dt);
 
 double calculate_drag(double velocity){
 

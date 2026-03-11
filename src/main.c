@@ -4,7 +4,7 @@
 double TIME_PASSED = 0.0f;
 
 void physics_update(Vehicle_t *v, double dt);
-void acc_update(Vehicle_t *v);
+void acc_update(Vehicle_t *v, double dt);
 void acc_on_off(Vehicle_t *v);
 void acc_set_speed(Vehicle_t *v, double set_speed);
 
@@ -19,7 +19,15 @@ int main(){
     my_car.inputs = (AccInputs_t){
     .brake_pedal = 0,
     .radar_front = 0.0
-};
+    };
+    my_car.acc_values = (Acc_values){
+    .integral_error = 0,
+    .last_error = 0,
+    .target_speed = 0,
+    .radar_speed = 0,
+    .last_radar_front = 0
+    };
+    //set all to 0
 
     Vehicle_t car_2;
     car_2.velocity = 50.0;
@@ -30,7 +38,15 @@ int main(){
     car_2.inputs = (AccInputs_t){
     .brake_pedal = 0,
     .radar_front = 0.0
-};
+    };
+    car_2.acc_values = (Acc_values){
+    .integral_error = 0,
+    .last_error = 0,
+    .target_speed = 0,
+    .radar_speed = 0,
+    .last_radar_front = 0
+    };
+    //set all to 0
 
     //set radar
     my_car.inputs.radar_front = car_2.position - my_car.position;
@@ -39,10 +55,6 @@ int main(){
     FILE *fpt;
     fpt = fopen("../vehicle_status.csv", "w+");
     fprintf(fpt, "Velocity,Position,Throttle,Radar Front,State,Time,Velocity,Position,Throttle\n");
-    fclose(fpt);
-
-    fpt = fopen("../vehicle_status.csv", "a+");
-
 
     //acc off, speeds up
     my_car.throttle = 0.3;

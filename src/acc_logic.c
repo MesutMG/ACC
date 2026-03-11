@@ -63,7 +63,7 @@ void acc_update(Vehicle_t *v, double dt) {
                 printf("throttle/// %f\n", v->throttle);
                 break;
             
-            } else {printf("hmm");break;}
+            } else {printf("Invalid Radar");break;}
 
         case ACC_FOLLOW:
             printf("acc_follow///\n");
