@@ -37,6 +37,6 @@ double calculate_friction(double mass);
  * * @param v Pointer to the vehicle struct (Input/Output)
  * @param dt Time step in seconds (e.g., 0.1)
  */
-void physics_update(Vehicle_t *v, double dt, double TIME_PASSED);
+void physics_update(Vehicle_t *v, double dt);
 
 #endif
