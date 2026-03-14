@@ -14,4 +14,14 @@ typedef struct {
     AccInputs_t inputs;//onoff-setspeed-brake-radar
 } Vehicle_t;
 
+double acc_pid(Vehicle_t *v, double dt);
+
+void acc_update(Vehicle_t *v, double dt);
+
+void acc_on_off(Vehicle_t *v);
+
+void acc_set_speed(Vehicle_t *v, double set_speed);
+
+void find_follow_target_speed(Vehicle_t *v, double dt);
+
 #endif

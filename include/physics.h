@@ -11,32 +11,14 @@
 #define ENGINE_FORCE_MAX 5000.0f    //5000N at 100% throttle - //move to the vehicle_t
 
 
-/**
- * @brief Calculates aerodynamic drag force.
- * Formula: 0.5 * rho * Cd * A * v^2
- * @param velocity Current speed in m/s
- * @return Force in Newtons (always positive magnitude)
- */
 double calculate_drag(double velocity);
 
-/**
- * @brief Calculates rolling resistance.
- * Formula: mass * gravity * friction_coeff
- * @param mass Vehicle mass in kg
- * @return Force in Newtons
- */
 double calculate_friction(double mass);
 
-/**
- * @brief Main physics update loop (Euler Integration).
- * 1. Calculate Engine Force (Assume max force is 5000N at 100% throttle).
- * 2. Sum forces (Engine - Drag - Friction).
- * 3. Calculate Acceleration (F = ma).
- * 4. Update Velocity (v = v + a*dt).
- * 5. Update Position (x = x + v*dt).
- * * @param v Pointer to the vehicle struct (Input/Output)
- * @param dt Time step in seconds (e.g., 0.1)
- */
+double get_acceleration(Vehicle_t *v, double test_velocity);
+
+void acc_update(Vehicle_t *v, double dt);
+
 void physics_update(Vehicle_t *v, double dt);
 
 #endif
