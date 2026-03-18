@@ -1,7 +1,7 @@
 #ifndef PHYSICS_H
 #define PHYSICS_H
 
-#include "acc_types.h"
+#include "vehicle.h"
 
 #define AIR_DENSITY 1.225f          //kg/m^3
 #define DRAG_COEFF 0.3f             //aerodynamic drag (Cd)

@@ -2,6 +2,7 @@
 #define ACC_LOGIC_H
 
 #include <stdint.h>
+#include "vehicle.h"
 
 #define Kp 0.04775f
 #define Ki 0.00677f
@@ -10,26 +11,14 @@
 #define Kgap 0.02f //for gap-closing
 #define safe_following_distance 40.0f
 
-//off, standby, active
-typedef enum {
-    ACC_OFF,      //system disabled
-    ACC_STANDBY,  //system enabled but not active (zb speed too low)
-    ACC_ACTIVE,    //system controlling throttle/brakes
-    ACC_FOLLOW
-} AccState_t;
+double acc_pid(Vehicle_t *v, double dt);
 
-typedef struct {
-    double integral_error; //ACC PID
-    double last_error; //ACC PID
-    double target_speed;
-    double radar_speed; //speed of the car front
-    double last_radar_front;
-} Acc_values;
+void acc_update(Vehicle_t *v, double dt);
 
-//on/off, set speed, brake%, radar dist.
-typedef struct {
-    uint8_t brake_pedal;      // 0-100%
-    double radar_front;    //distance to lead vehicle (m)
-} AccInputs_t;
+void acc_on_off(Vehicle_t *v);
+
+void acc_set_speed(Vehicle_t *v, double set_speed);
+
+void find_follow_target_speed(Vehicle_t *v, double dt);
 
 #endif

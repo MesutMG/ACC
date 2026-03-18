@@ -1,7 +1,5 @@
 #include "physics.h"
 
-void acc_update(Vehicle_t *v, double dt);
-
 double calculate_drag(double velocity){
 
     return
@@ -30,13 +28,7 @@ double get_acceleration(Vehicle_t *v, double test_velocity){
     return (net_force / v->mass);
 }
 
-//use the equations to write a differential eq. and solve with runge-kutta
-
 void physics_update(Vehicle_t *v, double dt){
-
-    if (v->state != ACC_OFF){
-        acc_update(v, dt);
-    }
 
     double v_current = v->velocity;
 
