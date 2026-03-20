@@ -1,4 +1,5 @@
 #include "physics.h"
+#include "noise.h"
 
 double calculate_drag(double velocity){
 
@@ -19,8 +20,8 @@ double get_acceleration(Vehicle_t *v, double test_velocity){
 
     double engine_force = ENGINE_FORCE_MAX * v->throttle;
 
-    double net_force = engine_force - drag - friction;
-
+    double net_force = (engine_force - drag - friction);
+                            /* noise_constant_only_positive();*/
     if ((test_velocity <= 0.0) && (net_force < 0.0)){
         return 0.0;
     }

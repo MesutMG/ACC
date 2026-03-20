@@ -77,6 +77,7 @@ void acc_update(Vehicle_t *v, double dt) {
 
             } else if (v->radar_front >= 150.0){
                 v->state = ACC_ACTIVE;
+                v->acc_values.target_speed = v->acc_values.last_set_speed;
                 printf("acc is turning on\n");
                 break;
             } else {
@@ -103,6 +104,7 @@ void acc_set_speed(Vehicle_t *v, double set_speed){
     if ((v->state == ACC_STANDBY) || (v->state == ACC_ACTIVE)){
         v->state = ACC_ACTIVE;
         v->acc_values.target_speed = set_speed;
+        v->acc_values.last_set_speed = set_speed;
     }
 
     else if (v->state == ACC_OFF){

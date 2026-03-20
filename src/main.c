@@ -2,6 +2,7 @@
 #include "acc_logic.h"
 #include "physics.h"
 #include "vehicle.h"
+#include "noise.h"
 
 double TIME_PASSED = 0.0f;
 
@@ -23,12 +24,13 @@ int main(){
     .last_error = 0,
     .target_speed = 0,
     .radar_speed = 0,
-    .last_radar_front = 0
+    .last_radar_front = 0,
+    .last_set_speed = 0
     };
 
 
     Vehicle_t car_2;
-    car_2.velocity = 40;
+    car_2.velocity = 0;
     car_2.mass = 1000;
     car_2.throttle = 0;
 
@@ -43,12 +45,13 @@ int main(){
     .last_error = 0,
     .target_speed = 0,
     .radar_speed = 0,
-    .last_radar_front = 0
+    .last_radar_front = 0,
+    .last_set_speed = 0
     };
 
 
     //radar info
-    my_car.radar_front = car_2.position - my_car.position;
+    my_car.radar_front = (car_2.position - my_car.position) + (car_2.position - my_car.position) * noise_constant();
 
 
     FILE *fpt;
@@ -58,7 +61,7 @@ int main(){
 
     //acc off, speeds up
     my_car.throttle = 0.3;
-    //car_2.throttle = 0.3;
+    car_2.throttle = 0.3;
     double time_step = 0.05f;
 
     for (uint32_t i = 0; i < 100; i++)
@@ -69,7 +72,7 @@ int main(){
 
         //radar update
         my_car.acc_values.last_radar_front = my_car.radar_front;
-        my_car.radar_front = car_2.position - my_car.position;
+        my_car.radar_front = (car_2.position - my_car.position) + (car_2.position - my_car.position) * noise_constant();;
 
         TIME_PASSED += time_step;
 
@@ -90,7 +93,7 @@ int main(){
 
         //radar update
         my_car.acc_values.last_radar_front = my_car.radar_front;
-        my_car.radar_front = car_2.position - my_car.position;
+        my_car.radar_front = (car_2.position - my_car.position) + (car_2.position - my_car.position) * noise_constant();;
 
         TIME_PASSED += time_step;
 
@@ -108,7 +111,7 @@ int main(){
 
         //radar update
         my_car.acc_values.last_radar_front = my_car.radar_front;
-        my_car.radar_front = car_2.position - my_car.position;
+        my_car.radar_front = (car_2.position - my_car.position) + (car_2.position - my_car.position) * noise_constant();;
 
         TIME_PASSED += 0.5;
 
