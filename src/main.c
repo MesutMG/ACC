@@ -1,13 +1,9 @@
 #include <stdio.h>
 #include "acc_logic.h"
+#include "physics.h"
 #include "vehicle.h"
 
 double TIME_PASSED = 0.0f;
-
-void physics_update(Vehicle_t *v, double dt);
-void acc_update(Vehicle_t *v, double dt);
-void acc_on_off(Vehicle_t *v);
-void acc_set_speed(Vehicle_t *v, double set_speed);
 
 int main(){
 
@@ -32,7 +28,7 @@ int main(){
 
 
     Vehicle_t car_2;
-    car_2.velocity = 0;
+    car_2.velocity = 40;
     car_2.mass = 1000;
     car_2.throttle = 0;
 
@@ -62,7 +58,7 @@ int main(){
 
     //acc off, speeds up
     my_car.throttle = 0.3;
-    car_2.throttle = 0.3;
+    //car_2.throttle = 0.3;
     double time_step = 0.05f;
 
     for (uint32_t i = 0; i < 100; i++)
