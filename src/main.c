@@ -61,7 +61,7 @@ int main(){
 
     //acc off, speeds up
     my_car.throttle = 0.3;
-    car_2.throttle = 0.3;
+    car_2.throttle = 0.5;
     double time_step = 0.05f;
 
     for (uint32_t i = 0; i < 100; i++)
@@ -83,9 +83,9 @@ int main(){
  
 
     acc_on_off(&my_car);
-    acc_set_speed(&my_car,60);
+    acc_set_speed(&my_car,80);
 
-    for (uint32_t i = 0; i < 3000; i++)
+    for (uint32_t i = 0; i < 2500; i++)
     {
         acc_update(&my_car, time_step);
         physics_update(&my_car, time_step);

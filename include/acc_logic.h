@@ -4,9 +4,17 @@
 #include <stdint.h>
 #include "vehicle.h"
 
-#define Kp 0.04775f
-#define Ki 0.00677f
-#define Kd 0.07f
+//SOMEHOW TUNE THIS
+
+#define Kp 0.02275f
+#define Ki 0.0125f
+#define Kd 0.00125f
+
+//#define Ku 0.091f
+//#define Ti 0.00021f
+//#define Tu 0.00042f
+//#define Td 0.0000525f
+
 #define integral_max 50.0f
 #define Kgap 0.02f //for gap-closing
 #define safe_following_distance 40.0f
