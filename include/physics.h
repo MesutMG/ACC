@@ -9,7 +9,7 @@
 #define GRAVITY 9.81f               //m/s^2
 #define ROLLING_RESISTANCE 0.015f   //road friction
 #define ENGINE_FORCE_MAX 5000.0f    //5000N at 100% throttle - //move to the vehicle_t
-
+#define BRAKE_FORCE_MAX  10000.0f
 
 double calculate_drag(double velocity);
 

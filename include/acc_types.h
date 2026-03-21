@@ -10,6 +10,7 @@ typedef struct {
     double radar_speed; //speed of the car front
     double last_radar_front;
     double last_set_speed;
+    double acc_break;
 } Acc_values;
 
 //off, standby, active

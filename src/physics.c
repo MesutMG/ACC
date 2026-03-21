@@ -20,6 +20,8 @@ double get_acceleration(Vehicle_t *v, double test_velocity){
 
     double engine_force = ENGINE_FORCE_MAX * v->throttle;
 
+    double brake_force = BRAKE_FORCE_MAX * v->acc_values.acc_break;
+
     double net_force = (engine_force - drag - friction) + (engine_force - drag - friction) * noise_constant_only_positive();
     if ((test_velocity <= 0.0) && (net_force < 0.0)){
         return 0.0;

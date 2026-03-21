@@ -25,7 +25,8 @@ int main(){
     .target_speed = 0,
     .radar_speed = 0,
     .last_radar_front = 0,
-    .last_set_speed = 0
+    .last_set_speed = 0,
+    .acc_break = 0
     };
 
 
@@ -46,7 +47,8 @@ int main(){
     .target_speed = 0,
     .radar_speed = 0,
     .last_radar_front = 0,
-    .last_set_speed = 0
+    .last_set_speed = 0,
+    .acc_break = 0
     };
 
 

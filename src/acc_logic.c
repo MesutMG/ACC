@@ -67,6 +67,7 @@ void acc_update(Vehicle_t *v, double dt) {
             
             } else {printf("Invalid Radar\n");break;}
 
+            //add braking with v->acc_values.acc_brake
         case ACC_FOLLOW:
             printf("acc_follow\n");
 
@@ -114,6 +115,7 @@ void acc_set_speed(Vehicle_t *v, double set_speed){
 }
 
 //this is not working
+//add RK4
 void find_follow_target_speed(Vehicle_t *v, double dt){
     printf("last radar front %f, radar front %f, dt %f\n",v->acc_values.last_radar_front, v->radar_front, dt);
     v->acc_values.radar_speed =((v->acc_values.last_radar_front - v->radar_front) / dt);
