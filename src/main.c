@@ -57,7 +57,7 @@ int main(){
 
 
     FILE *fpt;
-    fpt = fopen("../vehicle_status.csv", "w+");
+    fpt = fopen("../output/vehicle_status.csv", "w+");
     if (fpt == NULL){perror("file could not be opened"); return 1;}
     fprintf(fpt, "Velocity,Position,Throttle,Radar Front,State,Time,Velocity,Position,Throttle\n");
 
