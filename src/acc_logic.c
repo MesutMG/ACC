@@ -1,4 +1,4 @@
-#include "acc_types.h"
+#include "acc_logic.h"
 #include "stdio.h"
 
 
@@ -21,91 +21,92 @@ double acc_pid(Vehicle_t *v, double dt) {
 
     double pid_result = (Kp * proportional) + (Ki * v->acc_values.integral_error) + (Kd * derivative);
 
-    //set max throttle values
+    //min max throttle (0-1)
     if (pid_result > 1.0) {pid_result = 1;}
     else if (pid_result < 0.0) {pid_result = 0;}
 
     // using the older throttle so it doesn't jump --> eases the throttle
-    double output = (v->throttle*0.8) + (pid_result*0.2);
+    double output_throttle = pid_result;
+    //double output_throttle = (v->throttle*0.8) + (pid_result*0.2);
     
-    return output;
+    return output_throttle;
 }
 
 void acc_update(Vehicle_t *v, double dt) {
+
     printf("-------\n");
-    //state machine
+    
     switch (v->state) {
         
         case ACC_OFF:
-            printf("acc_off///\n");
+            printf("acc_off\n");
             break;
 
         case ACC_STANDBY:
-            printf("acc_standby///\n");
+            printf("acc_standby\n");
             break;
         
         case ACC_ACTIVE:
-            printf("acc_active///\n");
+            printf("acc_active\n");
 
-            if (v->inputs.brake_pedal > 0) {
+            if (v->brake_pedal > 0) {
                 v->state = ACC_STANDBY;
                 v->throttle = 0.0; //letting the driver take control
-                printf("breaked");
+                printf("breaked\n");
                 break;
 
-            } else if ((v->inputs.radar_front < 150.0) && (v->inputs.radar_front > 0)){
+            } else if ((v->radar_front < 150.0) && (v->radar_front > 0)){
                 v->state = ACC_FOLLOW;
-                printf("radar lower than 150, activating follow");
+                printf("radar lower than 150, activating follow\n");
                 break;
             
-            } else if (v->inputs.radar_front >= 150.0){
+            } else if (v->radar_front >= 150.0){
                 v->throttle = acc_pid(v, dt); 
-                printf("throttle/// %f\n", v->throttle);
+                printf("throttle %f\n", v->throttle);
                 break;
             
-            } else {printf("Invalid Radar");break;}
+            } else {printf("Invalid Radar\n");break;}
 
+            //add braking with v->acc_values.acc_brake
         case ACC_FOLLOW:
-            printf("acc_follow///\n");
+            printf("acc_follow\n");
 
-            if (v->inputs.brake_pedal > 0) {
+            if (v->brake_pedal > 0) {
                 v->state = ACC_STANDBY;
                 v->throttle = 0.0; //letting the driver take control
-                printf("breaked");
+                printf("breaked\n");
                 break;
 
-            } else if (v->inputs.radar_front >= 150.0){
+            } else if (v->radar_front >= 200.0){
                 v->state = ACC_ACTIVE;
-                printf("acc is turning on");
+                v->acc_values.target_speed = v->acc_values.last_set_speed;
+                printf("acc is turning on\n");
                 break;
             } else {
+
             find_follow_target_speed(v, dt);
-            
             v->throttle = acc_pid(v, dt);
 
             printf("radar active - adjusting target speed to: %f\n", v->acc_values.target_speed);
             
             break;
-            }
-            
+            }     
     }
 }
-
 
 void acc_on_off(Vehicle_t *v){
     if (v->state == ACC_OFF){
         v->state = ACC_STANDBY;
     } else if ((v->state == ACC_STANDBY) || (v->state == ACC_ACTIVE)) {
         v->state = ACC_OFF; 
-    }
-    
+    }   
 }
-
 
 void acc_set_speed(Vehicle_t *v, double set_speed){
     if ((v->state == ACC_STANDBY) || (v->state == ACC_ACTIVE)){
         v->state = ACC_ACTIVE;
         v->acc_values.target_speed = set_speed;
+        v->acc_values.last_set_speed = set_speed;
     }
 
     else if (v->state == ACC_OFF){
@@ -113,11 +114,16 @@ void acc_set_speed(Vehicle_t *v, double set_speed){
     }
 }
 
-
+//this is not working
+//add RK4
 void find_follow_target_speed(Vehicle_t *v, double dt){
-    v->acc_values.radar_speed = v->velocity - ((v->acc_values.last_radar_front - v->inputs.radar_front) / dt);
-    
+    printf("last radar front %f, radar front %f, dt %f\n",v->acc_values.last_radar_front, v->radar_front, dt);
+    v->acc_values.radar_speed =((v->acc_values.last_radar_front - v->radar_front) / dt);
+    printf("target speed first %f\n", v->acc_values.target_speed);
+
     //set the target speed to lower one (speed of car in front or the ACC set speed)
-    if (v->acc_values.radar_speed < v->acc_values.target_speed){v->acc_values.target_speed = v->acc_values.radar_speed;}
-    printf("\nfinding target_speed: %f",v->acc_values.target_speed);
+    if (v->acc_values.radar_speed < v->acc_values.target_speed){
+        v->acc_values.target_speed = v->acc_values.radar_speed;
+    }
+    printf("finding target_speed: %f\n",v->acc_values.target_speed);
 }

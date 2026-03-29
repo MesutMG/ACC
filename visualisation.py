@@ -1,6 +1,6 @@
 from matplotlib import pyplot as plt
 
-file = open("./vehicle_status.csv","r")
+file = open("output/vehicle_status.csv","r")
 
 line = file.readline() #skipping first line since it's just text
 

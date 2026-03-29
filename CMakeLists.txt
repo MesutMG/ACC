@@ -11,7 +11,7 @@ set(SOURCES
     src/main.c
     src/physics.c
     src/acc_logic.c
-
+    src/noise.c
 )
 
 add_executable(acc_sim ${SOURCES})
