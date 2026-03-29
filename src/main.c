@@ -7,7 +7,73 @@
 double TIME_PASSED = 0.0f;
 
 int main(){
+/*    Vehicle_t my_car = (Vehicle_t){
+    .velocity = 0,
+    .mass     = 1000,
+    .throttle = 0,
+    .brake    = 0,
+    .position = 0,
 
+    .inputs = (VehicleInputs_t){
+        .throttle_pedal = 0,
+        .brake_pedal    = 0,
+        .clutch_pedal    = 0,
+
+        .radar_front    = 0,
+        .radar_rear     = 0
+        };
+
+    .state = ACC_OFF;
+
+    .acc_values = (Acc_values){
+        .acc_throttle       = 0,
+        .acc_brake          = 0,
+
+        .integral_error     = 0,
+         .last_error         = 0,
+
+        .target_speed       = 0,
+        .radar_speed        = 0,
+        .last_radar_front   = 0
+        };
+
+    };
+
+    typedef struct {
+    double throttle_pedal;
+    double brake_pedal;
+    double clutch_pedal; //for later updates --> transmission system
+
+    double radar_front;
+    double radar_rear;
+} VehicleInputs_t;
+
+typedef struct {
+    double velocity;   // m/s
+    double mass;       // kg
+    double throttle;   // 0-1 (%)
+    double brake;// 0-1 (%)
+
+    double position;   // m
+    
+    AccState_t state;  //OFF-SBY-ON 
+    AccValues_t acc_values;
+
+    VehicleInputs_t inputs;
+
+} Vehicle_t;
+typedef struct {
+    double acc_throttle;
+    double acc_brake;
+
+    double integral_error; //ACC PID
+    double last_error; //ACC PID
+
+    double target_speed;
+    double radar_speed; //speed of the car front
+    double last_radar_front;
+} AccValues_t;
+*/
     Vehicle_t my_car;
     my_car.velocity = 0;
     my_car.mass = 1000;
