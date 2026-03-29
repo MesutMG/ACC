@@ -7,48 +7,74 @@ double TIME_PASSED = 0.0f;
 
 int main(){
 
-    Vehicle_t my_car;
-    my_car.velocity = 0;
-    my_car.mass = 1000;
-    my_car.throttle = 0;
+    Vehicle_t my_car = (Vehicle_t){
+    .velocity = 0,
+    .mass     = 1000,
+    .throttle = 0,
+    .brake    = 0,
+    .position = 0,
 
-    my_car.position = 0;
-    my_car.radar_front = 0;
+    .inputs = (VehicleInputs_t){
+        .throttle_pedal = 0,
+        .brake_pedal    = 0,
+        .clutch_pedal    = 0,
 
-    my_car.brake_pedal = 0;
-    my_car.state = ACC_OFF;
+        .radar_front    = 0,
+        .radar_rear     = 0
+        };
 
-    my_car.acc_values = (Acc_values){
-    .integral_error = 0,
-    .last_error = 0,
-    .target_speed = 0,
-    .radar_speed = 0,
-    .last_radar_front = 0
+    .state = ACC_OFF;
+
+    .acc_values = (Acc_values){
+        .acc_throttle       = 0,
+        .acc_brake          = 0,
+
+        .integral_error     = 0,
+         .last_error         = 0,
+
+        .target_speed       = 0,
+        .radar_speed        = 0,
+        .last_radar_front   = 0
+        };
+
     };
 
 
-    Vehicle_t car_2;
-    car_2.velocity = 40;
-    car_2.mass = 1000;
-    car_2.throttle = 0;
+    Vehicle_t car_2 = (Vehicle_t){
+    .velocity = 0,
+    .mass     = 1000,
+    .throttle = 0,
+    .brake    = 0,
+    .position = 0,
 
-    car_2.position = 300;
-    car_2.radar_front = 0;
+    .inputs = (VehicleInputs_t){
+        .throttle_pedal = 0,
+        .brake_pedal    = 0,
+        .clutch_pedal    = 0,
 
-    car_2.brake_pedal = 0;
-    car_2.state = ACC_OFF;
-    
-    car_2.acc_values = (Acc_values){
-    .integral_error = 0,
-    .last_error = 0,
-    .target_speed = 0,
-    .radar_speed = 0,
-    .last_radar_front = 0
+        .radar_front    = 0,
+        .radar_rear     = 0
+        };
+
+    .state = ACC_OFF;
+
+    .acc_values = (Acc_values){
+        .acc_throttle       = 0,
+        .acc_brake          = 0,
+
+        .integral_error     = 0,
+         .last_error         = 0,
+
+        .target_speed       = 0,
+        .radar_speed        = 0,
+        .last_radar_front   = 0
+        };
+
     };
 
 
     //radar info
-    my_car.radar_front = car_2.position - my_car.position;
+    my_car.inputs.radar_front = car_2.position - my_car.position;
 
 
     FILE *fpt;

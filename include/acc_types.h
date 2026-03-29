@@ -4,12 +4,16 @@
 #include <stdint.h>
 
 typedef struct {
+    double acc_throttle;
+    double acc_brake;
+
     double integral_error; //ACC PID
     double last_error; //ACC PID
+
     double target_speed;
     double radar_speed; //speed of the car front
     double last_radar_front;
-} Acc_values;
+} AccValues_t;
 
 //off, standby, active
 typedef enum {
