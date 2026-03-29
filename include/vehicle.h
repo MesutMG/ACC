@@ -8,13 +8,24 @@ typedef struct {
     double velocity;   // m/s
     double mass;       // kg
     double throttle;   // 0-1 (%)
+    double brake;// 0-1 (%)
 
     double position;   // m
-    double radar_front;
+    
+    AccState_t acc_state;  //OFF-SBY-ON 
+    AccValues_t acc_values;
 
-    uint8_t brake_pedal;      // 0-100%
-    AccState_t state;  //OFF-SBY-ON 
-    Acc_values acc_values;
+    VehicleInputs_t inputs;
+
 } Vehicle_t;
+
+typedef struct {
+    double throttle_pedal;
+    double brake_pedal;
+    double clutch_pedal; //for later updates --> transmission system
+
+    double radar_front;
+    double radar_rear;
+} VehicleInputs_t;
 
 #endif

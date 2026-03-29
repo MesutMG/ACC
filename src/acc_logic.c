@@ -1,10 +1,20 @@
 #include "acc_logic.h"
 #include "stdio.h"
 
+// TODO:
+//  THROTTLE  / ACC_THROTTLE / THROTTLE_PEDAL
+//  BREAK / ACC_BREAK / BREAK_PEDAL
+//  VEHICLE_INPUTS - RADAR_FRONT
 
 double acc_pid(Vehicle_t *v, double dt) {
     
     if (dt <= 0.0){return 0.0;}
+
+    /*
+        This part calculates the THROTTLE PERCENTAGE needed
+        for the desired velocity using the last and cumulative data.
+        Returns throttle value between 0 and 1.
+    */
 
     double speed_error = v->acc_values.target_speed - v->velocity;
 
@@ -36,7 +46,7 @@ void acc_update(Vehicle_t *v, double dt) {
 
     printf("-------\n");
     
-    switch (v->state) {
+    switch (v->acc_state) {
         
         case ACC_OFF:
             printf("acc_off\n");
@@ -50,13 +60,13 @@ void acc_update(Vehicle_t *v, double dt) {
             printf("acc_active\n");
 
             if (v->brake_pedal > 0) {
-                v->state = ACC_STANDBY;
+                v->acc_state = ACC_STANDBY;
                 v->throttle = 0.0; //letting the driver take control
                 printf("breaked\n");
                 break;
 
             } else if ((v->radar_front < 150.0) && (v->radar_front > 0)){
-                v->state = ACC_FOLLOW;
+                v->acc_state = ACC_FOLLOW;
                 printf("radar lower than 150, activating follow\n");
                 break;
             
@@ -72,13 +82,13 @@ void acc_update(Vehicle_t *v, double dt) {
             printf("acc_follow\n");
 
             if (v->brake_pedal > 0) {
-                v->state = ACC_STANDBY;
+                v->acc_state = ACC_STANDBY;
                 v->throttle = 0.0; //letting the driver take control
                 printf("breaked\n");
                 break;
 
             } else if (v->radar_front >= 200.0){
-                v->state = ACC_ACTIVE;
+                v->acc_state = ACC_ACTIVE;
                 v->acc_values.target_speed = v->acc_values.last_set_speed;
                 printf("acc is turning on\n");
                 break;
@@ -95,21 +105,21 @@ void acc_update(Vehicle_t *v, double dt) {
 }
 
 void acc_on_off(Vehicle_t *v){
-    if (v->state == ACC_OFF){
-        v->state = ACC_STANDBY;
-    } else if ((v->state == ACC_STANDBY) || (v->state == ACC_ACTIVE)) {
-        v->state = ACC_OFF; 
+    if (v->acc_state == ACC_OFF){
+        v->acc_state = ACC_STANDBY;
+    } else if ((v->acc_state == ACC_STANDBY) || (v->acc_state == ACC_ACTIVE)) {
+        v->acc_state = ACC_OFF; 
     }   
 }
 
 void acc_set_speed(Vehicle_t *v, double set_speed){
-    if ((v->state == ACC_STANDBY) || (v->state == ACC_ACTIVE)){
-        v->state = ACC_ACTIVE;
+    if ((v->acc_state == ACC_STANDBY) || (v->acc_state == ACC_ACTIVE)){
+        v->acc_state = ACC_ACTIVE;
         v->acc_values.target_speed = set_speed;
         v->acc_values.last_set_speed = set_speed;
     }
 
-    else if (v->state == ACC_OFF){
+    else if (v->acc_state == ACC_OFF){
         return;
     }
 }
