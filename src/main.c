@@ -101,7 +101,7 @@ int main(){
         TIME_PASSED += time_step;
 
         fprintf(fpt, "%f,%f,%f,%f,%d,%f,%f,%f,%f\n",
-        my_car.velocity, my_car.position, my_car.throttle, my_car.radar_front, my_car.state, TIME_PASSED,
+        my_car.velocity, my_car.position, my_car.throttle, my_car.radar_front, my_car.acc_state, TIME_PASSED,
         car_2.velocity, car_2.position, car_2.throttle);
     }
  
@@ -122,7 +122,7 @@ int main(){
         TIME_PASSED += time_step;
 
         fprintf(fpt, "%f,%f,%f,%f,%d,%f,%f,%f,%f\n",
-        my_car.velocity, my_car.position, my_car.throttle, my_car.radar_front, my_car.state, TIME_PASSED,
+        my_car.velocity, my_car.position, my_car.throttle, my_car.radar_front, my_car.acc_state, TIME_PASSED,
         car_2.velocity, car_2.position, car_2.throttle);
     }
 /*
@@ -140,7 +140,7 @@ int main(){
         TIME_PASSED += 0.5;
 
         fprintf(fpt, "%f,%f,%f,%f,%d,%f,%f,%f,%f\n",
-        my_car.velocity, my_car.position, my_car.throttle, my_car.radar_front, my_car.state, TIME_PASSED,
+        my_car.velocity, my_car.position, my_car.throttle, my_car.radar_front, my_car.acc_state, TIME_PASSED,
         car_2.velocity, car_2.position, car_2.throttle);
     }
 
@@ -158,7 +158,7 @@ int main(){
         TIME_PASSED += 0.5;
 
         fprintf(fpt, "%f,%f,%f,%f,%d,%f,%f,%f,%f\n",
-        my_car.velocity, my_car.position, my_car.throttle, my_car.radar_front, my_car.state, TIME_PASSED,
+        my_car.velocity, my_car.position, my_car.throttle, my_car.radar_front, my_car.acc_state, TIME_PASSED,
         car_2.velocity, car_2.position, car_2.throttle);
     }
 */
