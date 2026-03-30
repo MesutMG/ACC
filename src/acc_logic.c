@@ -6,6 +6,16 @@
 //  BREAK / ACC_BREAK / BREAK_PEDAL
 //  VEHICLE_INPUTS - RADAR_FRONT
 
+/*
+    TODO: add vehicle_update.c file and implement throttle/brake
+    updating functions from ACC logic etc.
+
+    GOAL: setting the values of vehicle before running physics.c
+
+    the code is just updating the acc_throttle, has no effect on
+    vehicle->throttle
+*/
+
 double acc_pid(Vehicle_t *v, double dt) {
     
     if (dt <= 0.0){return 0.0;}
@@ -59,21 +69,31 @@ void acc_update(Vehicle_t *v, double dt) {
         case ACC_ACTIVE:
             printf("acc_active\n");
 
-            if (v->brake_pedal > 0) {
+            if (v->inputs.brake_pedal > 0) {
                 v->acc_state = ACC_STANDBY;
-                v->throttle = 0.0; //letting the driver take control
+                v->acc_values.acc_throttle = 0.0; //letting the driver take control
                 printf("breaked\n");
                 break;
 
-            } else if ((v->radar_front < 150.0) && (v->radar_front > 0)){
+            } else if ((v->inputs.radar_front < 150.0) && (v->inputs.radar_front > 0)){
                 v->acc_state = ACC_FOLLOW;
                 printf("radar lower than 150, activating follow\n");
                 break;
             
-            } else if (v->radar_front >= 150.0){
-                v->throttle = acc_pid(v, dt); 
-                printf("throttle %f\n", v->throttle);
+            } else if (v->inputs.radar_front >= 150.0){
+                v->acc_values.acc_throttle = acc_pid(v, dt); 
+                printf("acc_throttle = %f\n", v->throttle);
                 break;
+
+                /*
+                    TODO: add vehicle_update.c file and implement throttle/brake
+                    updating functions from ACC logic etc.
+
+                    GOAL: setting the values of vehicle before running physics.c
+
+                    the code is just updating the acc_throttle, has no effect on
+                    vehicle->throttle
+                */
             
             } else {printf("Invalid Radar\n");break;}
 
@@ -81,13 +101,13 @@ void acc_update(Vehicle_t *v, double dt) {
         case ACC_FOLLOW:
             printf("acc_follow\n");
 
-            if (v->brake_pedal > 0) {
+            if (v->inputs.brake_pedal > 0) {
                 v->acc_state = ACC_STANDBY;
-                v->throttle = 0.0; //letting the driver take control
+                v->acc_values.acc_throttle = 0.0; //letting the driver take control
                 printf("breaked\n");
                 break;
 
-            } else if (v->radar_front >= 200.0){
+            } else if (v->inputs.radar_front >= 200.0){
                 v->acc_state = ACC_ACTIVE;
                 v->acc_values.target_speed = v->acc_values.last_set_speed;
                 printf("acc is turning on\n");
@@ -95,7 +115,7 @@ void acc_update(Vehicle_t *v, double dt) {
             } else {
 
             find_follow_target_speed(v, dt);
-            v->throttle = acc_pid(v, dt);
+            v->acc_values.acc_throttle = acc_pid(v, dt);
 
             printf("radar active - adjusting target speed to: %f\n", v->acc_values.target_speed);
             
@@ -124,11 +144,22 @@ void acc_set_speed(Vehicle_t *v, double set_speed){
     }
 }
 
-//this is not working
-//add RK4
+/*
+    TODO: implement kalman filter to kalman.c or noise.c
+
+    the radar data is noisy so the follow procedure is
+    not working
+*/
 void find_follow_target_speed(Vehicle_t *v, double dt){
-    printf("last radar front %f, radar front %f, dt %f\n",v->acc_values.last_radar_front, v->radar_front, dt);
-    v->acc_values.radar_speed =((v->acc_values.last_radar_front - v->radar_front) / dt);
+    
+    printf("last radar front %f, radar front %f, dt %f\n",
+        v->acc_values.last_radar_front,
+        v->inputs.radar_front,
+        dt
+    );
+
+    //this breaks due to the noisy data
+    v->acc_values.radar_speed = ((v->acc_values.last_radar_front - v->inputs.radar_front) / dt);
     printf("target speed first %f\n", v->acc_values.target_speed);
 
     //set the target speed to lower one (speed of car in front or the ACC set speed)

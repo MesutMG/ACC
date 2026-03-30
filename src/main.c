@@ -75,7 +75,7 @@ int main(){
 
 
     //radar info
-    my_car.radar_front = (car_2.position - my_car.position) + (car_2.position - my_car.position) * noise_constant();
+    my_car.inputs.radar_front = (car_2.position - my_car.position) + (car_2.position - my_car.position) * noise_constant();
 
 
     FILE *fpt;
@@ -83,9 +83,16 @@ int main(){
     if (fpt == NULL){perror("file could not be opened"); return 1;}
     fprintf(fpt, "Velocity,Position,Throttle,Radar Front,State,Time,Velocity,Position,Throttle\n");
 
+
     //acc off, speeds up
-    my_car.throttle = 0.3;
-    car_2.throttle = 0.5;
+    my_car.inputs.throttle_pedal = 0.3;
+    car_2.inputs.throttle_pedal = 0.5;
+
+    /*
+        TODO: use the throttle_pedal and update the car's
+        throttle in the vehicle.c file
+    */
+
     double time_step = 0.05f;
 
     for (uint32_t i = 0; i < 100; i++)
@@ -95,17 +102,17 @@ int main(){
         physics_update(&car_2, time_step);
 
         //radar update
-        my_car.acc_values.last_radar_front = my_car.radar_front;
-        my_car.radar_front = (car_2.position - my_car.position) + (car_2.position - my_car.position) * noise_constant();;
+        my_car.acc_values.last_radar_front = my_car.inputs.radar_front;
+        my_car.inputs.radar_front = (car_2.position - my_car.position) + (car_2.position - my_car.position) * noise_constant();;
 
         TIME_PASSED += time_step;
 
         fprintf(fpt, "%f,%f,%f,%f,%d,%f,%f,%f,%f\n",
-        my_car.velocity, my_car.position, my_car.throttle, my_car.radar_front, my_car.acc_state, TIME_PASSED,
+        my_car.velocity, my_car.position, my_car.throttle, my_car.inputs.radar_front, my_car.acc_state, TIME_PASSED,
         car_2.velocity, car_2.position, car_2.throttle);
     }
  
-
+ 
     acc_on_off(&my_car);
     acc_set_speed(&my_car,80);
 
@@ -116,13 +123,13 @@ int main(){
         physics_update(&car_2, time_step);
 
         //radar update
-        my_car.acc_values.last_radar_front = my_car.radar_front;
-        my_car.radar_front = (car_2.position - my_car.position) + (car_2.position - my_car.position) * noise_constant();;
+        my_car.acc_values.last_radar_front = my_car.inputs.radar_front;
+        my_car.inputs.radar_front = (car_2.position - my_car.position) + (car_2.position - my_car.position) * noise_constant();;
 
         TIME_PASSED += time_step;
 
         fprintf(fpt, "%f,%f,%f,%f,%d,%f,%f,%f,%f\n",
-        my_car.velocity, my_car.position, my_car.throttle, my_car.radar_front, my_car.acc_state, TIME_PASSED,
+        my_car.velocity, my_car.position, my_car.throttle, my_car.inputs.radar_front, my_car.acc_state, TIME_PASSED,
         car_2.velocity, car_2.position, car_2.throttle);
     }
 /*
@@ -134,13 +141,13 @@ int main(){
         physics_update(&car_2, time_step);
 
         //radar update
-        my_car.acc_values.last_radar_front = my_car.radar_front;
-        my_car.radar_front = (car_2.position - my_car.position) + (car_2.position - my_car.position) * noise_constant();;
+        my_car.acc_values.last_radar_front = my_car.inputs.radar_front;
+        my_car.inputs.radar_front = (car_2.position - my_car.position) + (car_2.position - my_car.position) * noise_constant();;
 
         TIME_PASSED += 0.5;
 
         fprintf(fpt, "%f,%f,%f,%f,%d,%f,%f,%f,%f\n",
-        my_car.velocity, my_car.position, my_car.throttle, my_car.radar_front, my_car.acc_state, TIME_PASSED,
+        my_car.velocity, my_car.position, my_car.throttle, my_car.inputs.radar_front, my_car.acc_state, TIME_PASSED,
         car_2.velocity, car_2.position, car_2.throttle);
     }
 
@@ -152,13 +159,13 @@ int main(){
         physics_update(&car_2, time_step);
 
         //radar update
-        my_car.acc_values.last_radar_front = my_car.radar_front;
-        my_car.radar_front = 151;
+        my_car.acc_values.last_radar_front = my_car.inputs.radar_front;
+        my_car.inputs.radar_front = 151;
 
         TIME_PASSED += 0.5;
 
         fprintf(fpt, "%f,%f,%f,%f,%d,%f,%f,%f,%f\n",
-        my_car.velocity, my_car.position, my_car.throttle, my_car.radar_front, my_car.acc_state, TIME_PASSED,
+        my_car.velocity, my_car.position, my_car.throttle, my_car.inputs.radar_front, my_car.acc_state, TIME_PASSED,
         car_2.velocity, car_2.position, car_2.throttle);
     }
 */
