@@ -10,6 +10,7 @@ double noise_constant(){
 
         //printf("%f\n",value);
         return value;
+        //return 1;
     }
 
 double noise_constant_only_positive(){
@@ -18,4 +19,5 @@ double noise_constant_only_positive(){
 
         //printf("%f\n",value);
         return value;
+        //return 1;
 }
