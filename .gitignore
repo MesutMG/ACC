@@ -1,4 +1,4 @@
 build/
 vehicle_status.csv
 venv/
-output/
+output/*

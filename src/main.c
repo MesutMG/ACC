@@ -6,7 +6,7 @@
 
 double TIME_PASSED = 0.0f;
 
-int main(){
+int main(void){
 /*    Vehicle_t my_car = (Vehicle_t){
     .velocity = 0,
     .mass     = 1000,
